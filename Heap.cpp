@@ -45,3 +45,11 @@ void Heap::delMin() {
     arr.pop_back();
     heapify(0);
 }
+
+bool Heap::contains(Node *i) {
+    for (Node* node : arr) {
+        if (node == i)
+            return true;
+    }
+    return false;
+}

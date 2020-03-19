@@ -21,6 +21,7 @@ public:
     Node* getMin();
     bool isEmpty();
     void heapify(int i);
+    bool contains(Node* i);
 };
 
 
