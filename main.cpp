@@ -49,9 +49,33 @@ int main() {
         closedSet.insert(current);
         if (current == end) {
             cout << "END";
-            return 0;
+            break;
+        }
+        for (Node* neighbour : current->getNeighbours(grid)) {
+            if (closedSet.find(neighbour) == closedSet.end() && !neighbour->isWall) {
+                double g = current->g + 1;
+                double h = distance(neighbour, end);
+                double f = g + h;
+                if (neighbour->f > f) {
+                    neighbour->f = f;
+                    neighbour->g = g;
+                    neighbour->h = h;
+                    neighbour->parent = current;
+                    if (!openSet->contains(neighbour)) {
+                        openSet->add(neighbour);
+                    }
+                }
+
+            }
+
         }
     }
+    Node* temp = end;
+    while (temp->parent != nullptr) {
+        cout << temp->x << " " << temp->y << endl;
+        temp = temp->parent;
+    }
+
 
     in.close();
     return 0;
