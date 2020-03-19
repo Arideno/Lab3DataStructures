@@ -25,4 +25,29 @@ bool Heap::isEmpty() {
     return arr.empty();
 }
 
+void Heap::heapify(int i) {
+    int smallest = i;
+    int left = 2*i + 1;
+    int right = 2*i + 2;
+    if (left < arr.size() && arr[smallest] > arr[left]) {
+        smallest = left;
+    }
+    if (right < arr.size() && arr[smallest] > arr[right]) {
+        smallest = right;
+    }
 
+    if (smallest != i) {
+        int t = arr[i];
+        arr[i] = arr[smallest];
+        arr[smallest] = t;
+        heapify(smallest);
+    }
+}
+
+void Heap::delMin() {
+    int t = arr[0];
+    arr[0] = arr[arr.size()-1];
+    arr[arr.size()-1] = t;
+    arr.pop_back();
+    heapify(0);
+}
