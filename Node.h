@@ -15,9 +15,9 @@ public:
     int x;
     int y;
     Node* parent = nullptr;
-    double h;
-    double g;
-    double f;
+    double h = INT_MAX;
+    double g = INT_MAX;
+    double f = INT_MAX;
     bool isWall;
     vector<Node*> getNeighbours(const vector<vector<Node*> >& grid);
     Node(int x, int y, bool isWall);

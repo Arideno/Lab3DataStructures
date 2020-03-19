@@ -2,7 +2,9 @@
 // Created by daria on 18.03.20.
 //
 
+#include "Node.h"
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -12,11 +14,11 @@ using namespace std;
 
 class Heap {
 private:
-    vector<int> arr;
+    vector<Node*> arr;
 public:
-    void add(int i);
+    void add(Node* i);
     void delMin();
-    int getMin();
+    Node* getMin();
     bool isEmpty();
     void heapify(int i);
 };

@@ -4,20 +4,18 @@
 
 #include "Heap.h"
 
-void Heap::add(int i) {
+void Heap::add(Node* i) {
     arr.push_back(i);
 
     int index = arr.size()-1;
 
-    while (index != 0 && arr[(index-1)/2] > arr[index]) {
-        int t = arr[index];
-        arr[index] = arr[(index-1)/2];
-        arr[(index-1)/2] = t;
+    while (index != 0 && arr[(index-1)/2]->f > arr[index]->f) {
+        swap(arr[index], arr[(index-1)/2]);
         index = (index - 1) / 2;
     }
 }
 
-int Heap::getMin() {
+Node* Heap::getMin() {
     return arr[0];
 }
 
@@ -37,17 +35,13 @@ void Heap::heapify(int i) {
     }
 
     if (smallest != i) {
-        int t = arr[i];
-        arr[i] = arr[smallest];
-        arr[smallest] = t;
+        swap(arr[i], arr[smallest]);
         heapify(smallest);
     }
 }
 
 void Heap::delMin() {
-    int t = arr[0];
-    arr[0] = arr[arr.size()-1];
-    arr[arr.size()-1] = t;
+    swap(arr[0], arr[arr.size()-1]);
     arr.pop_back();
     heapify(0);
 }
