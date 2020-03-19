@@ -16,3 +16,13 @@ void Heap::add(int i) {
         index = (index - 1) / 2;
     }
 }
+
+int Heap::getMin() {
+    return arr[0];
+}
+
+bool Heap::isEmpty() {
+    return arr.empty();
+}
+
+
