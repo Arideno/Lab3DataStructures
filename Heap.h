@@ -14,7 +14,7 @@ class Heap {
 private:
     vector<int> arr;
 public:
-    void add(int n);
+    void add(int i);
     void delMin();
     int getMin();
     bool isEmpty();
