@@ -4,6 +4,7 @@
 #include "Node.h"
 #include <cmath>
 #include <set>
+#include <utility>
 
 using namespace std;
 
@@ -48,7 +49,6 @@ int main() {
         openSet->delMin();
         closedSet.insert(current);
         if (current == end) {
-            cout << "END";
             break;
         }
         for (Node* neighbour : current->getNeighbours(grid)) {
@@ -70,12 +70,46 @@ int main() {
 
         }
     }
-    Node* temp = end;
-    while (temp->parent != nullptr) {
-        cout << temp->x << " " << temp->y << endl;
-        temp = temp->parent;
+
+    if (end->parent == nullptr) {
+        cout << "No Path!\n";
+        return 0;
     }
 
+    vector<pair<int, int> > path;
+
+    Node* temp = end;
+    while (temp->parent != nullptr) {
+        path.insert(path.begin(), make_pair(temp->x, temp->y));
+        temp = temp->parent;
+    }
+    path.insert(path.begin(), make_pair(temp->x, temp->y));
+
+    char counter = '1';
+
+    vector<vector<char> > ans(n, vector<char>(m));
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (grid[i][j]->isWall)
+                ans[i][j] = 'X';
+            else
+                ans[i][j] = '.';
+        }
+    }
+
+    for (pair<int, int> coord : path) {
+        ans[coord.first][coord.second] = counter++;
+        if (counter - 1 == '9')
+            counter = 'a';
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << ans[i][j] << " ";
+        }
+        cout << endl;
+    }
 
     in.close();
     return 0;
