@@ -12,7 +12,7 @@ ifstream in;
 ofstream out;
 
 double distance(Node* node1, Node* node2) {
-    double dx = abs(node1->x - node2->y);
+    double dx = abs(node1->x - node2->x);
     double dy = abs(node1->y - node2->y);
     return dx + dy;
 }
@@ -52,8 +52,12 @@ int main() {
             break;
         }
         for (Node* neighbour : current->getNeighbours(grid)) {
-            if (closedSet.find(neighbour) == closedSet.end() && !neighbour->isWall) {
-                double g = current->g + 1;
+            if (closedSet.find(neighbour) == closedSet.end()) {
+                double g;
+                if (neighbour->isWall)
+                    g = current->g + 3;
+                else
+                    g = current->g + 1;
                 double h = distance(neighbour, end);
                 double f = g + h;
                 if (neighbour->f > f) {
